@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "./styles/animations.css";
+
+/* 
+  Global Base Styles
+  Design tokens are in tailwind.config.js
+  Component styles use Tailwind utilities directly
+*/
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: #0a0a0a;
+  color: #fafafa;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Typography defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Link defaults */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: #f59e0b;
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* Editor window dots - keep as utility classes */
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }

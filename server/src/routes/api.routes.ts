@@ -64,7 +64,7 @@ router.post('/analyze', async (req: Request<{}, {}, AnalyzeCodeRequest>, res: Re
  * GET /api/health
  * Health check endpoint
  */
-router.get('/health', (req: Request, res: Response) => {
+router.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
     status: 'ok',
     timestamp: new Date().toISOString(),

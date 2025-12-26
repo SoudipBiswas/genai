@@ -23,6 +23,8 @@ const CodeInputSection = ({
   isAnalyzing
 }: CodeInputSectionProps) => {
   const [inputMode, setInputMode] = useState<InputMode>('compare');
+  const [oldLanguage, setOldLanguage] = useState<string>('typescript');
+  const [newLanguage, setNewLanguage] = useState<string>('typescript');
 
   const canAnalyze = inputMode === 'compare' 
     ? oldCode.trim().length > 0 && newCode.trim().length > 0
@@ -89,6 +91,8 @@ const CodeInputSection = ({
                 code={oldCode}
                 onChange={setOldCode}
                 variant="before"
+                language={oldLanguage}
+                onLanguageChange={setOldLanguage}
               />
 
               <CodeEditorPanel
@@ -97,6 +101,8 @@ const CodeInputSection = ({
                 code={newCode}
                 onChange={setNewCode}
                 variant="after"
+                language={newLanguage}
+                onLanguageChange={setNewLanguage}
               />
             </motion.div>
           ) : (
@@ -113,6 +119,8 @@ const CodeInputSection = ({
                 subtitle="Paste code to analyze assumptions"
                 code={newCode}
                 onChange={setNewCode}
+                language={newLanguage}
+                onLanguageChange={setNewLanguage}
               />
               <p className="text-[#666666] text-sm mt-4">
                 AI will infer baseline assumptions and detect potential issues.

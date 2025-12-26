@@ -9,9 +9,11 @@ interface CodeEditorPanelProps {
   code: string;
   onChange: (value: string) => void;
   variant?: 'before' | 'after';
+  language?: string;
+  onLanguageChange?: (lang: string) => void;
 }
 
-const CodeEditorPanel = ({ title, subtitle, code, onChange, variant = 'before' }: CodeEditorPanelProps) => {
+const CodeEditorPanel = ({ title, subtitle, code, onChange, variant = 'before', language, onLanguageChange }: CodeEditorPanelProps) => {
   const [copied, setCopied] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -45,6 +47,24 @@ const CodeEditorPanel = ({ title, subtitle, code, onChange, variant = 'before' }
       reader.readAsText(file);
     }
   };
+
+  const languages = [
+    'typescript',
+    'javascript',
+    'python',
+    'java',
+    'c',
+    'cpp',
+    'go',
+    'rust',
+    'ruby',
+    'php',
+    'html',
+    'css',
+    'json',
+    'yaml',
+    'markdown',
+  ];
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -108,7 +128,23 @@ const CodeEditorPanel = ({ title, subtitle, code, onChange, variant = 'before' }
           </div>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
+          {/* Language selector */}
+          <div className="flex items-center gap-2 mr-1">
+            <label className="text-xs text-[#666666]">Lang</label>
+            <select
+              value={language || 'typescript'}
+              onChange={(e) => onLanguageChange?.(e.target.value)}
+              className="text-sm bg-transparent border border-[rgba(255,255,255,0.04)] rounded px-2 py-1 text-[#fafafa]"
+              aria-label="Select language"
+            >
+              {languages.map((lang) => (
+                <option key={lang} value={lang} className="bg-[#0b0b0b] text-[#fafafa]">{lang}</option>
+              ))}
+            </select>
+          </div>
+
+        
           <button
             onClick={handlePaste}
             className="p-2 rounded-lg hover:bg-[rgba(255,255,255,0.05)] transition-colors text-[#666666] hover:text-[#a1a1a1]"
@@ -160,7 +196,7 @@ const CodeEditorPanel = ({ title, subtitle, code, onChange, variant = 'before' }
       <div className="h-[350px]">
         <Editor
           height="100%"
-          defaultLanguage="typescript"
+          language={language || 'typescript'}
           theme="vs-dark"
           value={code}
           onChange={(value) => onChange(value || '')}

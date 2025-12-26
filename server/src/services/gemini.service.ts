@@ -8,8 +8,8 @@ export class GeminiService {
 
   constructor() {
     this.genAI = new GoogleGenerativeAI(config.geminiApiKey);
-    // Using Gemini 1.5 Flash for faster responses
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // Prefer Gemini 2.5 Flash as requested; fallback handled at runtime if unavailable
+    this.model = this.genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
   }
 
   /**
@@ -21,19 +21,29 @@ export class GeminiService {
     mode: 'compare' | 'single'
   ): Promise<{ results: AssumptionChange[]; stats: AnalysisStats }> {
     try {
+      console.log(`[Gemini] Starting analysis in ${mode} mode...`);
       const prompt = this.buildPrompt(oldCode, newCode, mode);
       
+      console.log('[Gemini] Calling Gemini API...');
       const result = await this.model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
 
+      console.log('[Gemini] Received response, parsing...');
+      console.log('[Gemini] Response preview:', text.substring(0, 200));
+      
       // Parse the JSON response from Gemini
       const analysis = this.parseGeminiResponse(text);
       
+      console.log(`[Gemini] Analysis complete: ${analysis.results.length} changes detected`);
       return analysis;
     } catch (error) {
-      console.error('Gemini API Error:', error);
-      throw new Error('Failed to analyze code with Gemini API');
+      console.error('[Gemini] API Error Details:', error);
+      if (error instanceof Error) {
+        console.error('[Gemini] Error message:', error.message);
+        console.error('[Gemini] Error stack:', error.stack);
+      }
+      throw new Error('Failed to analyze code with Gemini API: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   }
 
@@ -73,7 +83,8 @@ Return your analysis as a JSON object with this exact structure:
       "oldAssumption": "What was assumed before",
       "newAssumption": "What is assumed now",
       "impact": "Concrete impact description",
-      "recommendation": "Optional: How to improve or mitigate"
+      "recommendation": "Optional: How to improve or mitigate",
+      "reasoning": "Detailed explanation of why this was flagged and how you detected it"
     }
   ],
   "stats": {
@@ -113,7 +124,8 @@ Return your analysis as a JSON object with this exact structure:
       "oldAssumption": "Inferred previous or ideal assumption",
       "newAssumption": "Current assumption in this code",
       "impact": "Potential impact",
-      "recommendation": "Optional: How to improve"
+      "recommendation": "Optional: How to improve",
+      "reasoning": "Detailed explanation of why this was flagged and how you detected it"
     }
   ],
   "stats": {

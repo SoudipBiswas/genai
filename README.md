@@ -1,3 +1,70 @@
+# Assumption Change Detector
+
+An AI-powered tool that analyzes code changes to detect shifts in underlying assumptions about API costs, performance, security, and architecture.
+
+## Setup
+
+### Frontend
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Create a `.env` file in the root directory:
+```
+VITE_API_URL=http://localhost:3001
+```
+
+3. Start the dev server:
+```bash
+npm run dev
+```
+
+### Backend
+
+1. Navigate to the server directory:
+```bash
+cd server
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the `server` directory:
+```
+GEMINI_API_KEY=your_gemini_api_key_here
+PORT=3001
+FRONTEND_URL=http://localhost:5173
+```
+
+4. Start the server:
+```bash
+npm run dev
+```
+
+## Features
+
+- **Dual-pane code comparison** with Monaco editor
+- **AI-powered assumption detection** using Google Gemini 1.5 Flash
+- **Multi-language support** (TypeScript, JavaScript, Python, Java, C++, Go, Rust, and more)
+- **Detailed reasoning** for each flagged change
+- **Cost and performance impact** estimates
+- **Minimal, editorial design** aesthetic
+
+## Tech Stack
+
+- Frontend: React 19 + TypeScript + Vite 7
+- Styling: Tailwind CSS + Custom CSS
+- Animations: Framer Motion
+- Code Editor: Monaco Editor
+- Backend: Node.js + Express + TypeScript
+- AI: Google Gemini 1.5 Flash API
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

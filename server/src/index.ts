@@ -7,7 +7,14 @@ const app: Express = express();
 
 // Middleware
 app.use(cors({
-  origin: config.frontendUrl,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests) or from localhost
+    if (!origin || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
@@ -15,7 +22,7 @@ app.use(express.json({ limit: '10mb' })); // Allow larger code submissions
 app.use(express.urlencoded({ extended: true }));
 
 // Request logging
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, _res: Response, next: NextFunction) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
   next();
 });
@@ -24,7 +31,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/api', apiRoutes);
 
 // Root endpoint
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.json({
     service: 'AssumptionLens API',
     version: '1.0.0',
@@ -45,7 +52,7 @@ app.use((req: Request, res: Response) => {
 });
 
 // Error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('[Server Error]:', err);
   res.status(500).json({
     error: 'INTERNAL_SERVER_ERROR',

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   AlertTriangle, 
@@ -11,7 +12,8 @@ import {
   XCircle,
   Info,
   ArrowRight,
-  Download
+  Download,
+  ChevronDown
 } from 'lucide-react';
 
 export interface AssumptionChange {
@@ -24,14 +26,15 @@ export interface AssumptionChange {
   newAssumption: string;
   impact: string;
   recommendation?: string;
+  reasoning?: string;
 }
 
-interface AnalysisStats {
+export interface AnalysisStats {
   totalChanges: number;
   criticalCount: number;
   warningCount: number;
-  estimatedCostImpact?: string;
-  performanceImpact?: string;
+  estimatedCostImpact: string;
+  performanceImpact: string;
 }
 
 interface OutputSectionProps {
@@ -79,6 +82,20 @@ const getTypeConfig = (type: string) => {
 };
 
 const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+
+  const toggleExpanded = (id: string) => {
+    setExpandedItems(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
   if (!isVisible || !results) return null;
 
   return (
@@ -223,6 +240,41 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
                             Recommendation
                           </div>
                           <p className="text-sm text-[#a1a1a1]">{change.recommendation}</p>
+                        </div>
+                      )}
+
+                      {/* Why This Was Flagged Toggle */}
+                      {change.reasoning && (
+                        <div className="mt-4">
+                          <button
+                            onClick={() => toggleExpanded(change.id)}
+                            className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg border border-amber-500/20 bg-amber-500/5 text-amber-500 hover:bg-amber-500/10 hover:border-amber-500/30 transition-all font-medium"
+                          >
+                            <ChevronDown 
+                              className={`w-4 h-4 transition-transform ${
+                                expandedItems.has(change.id) ? 'rotate-180' : ''
+                              }`}
+                            />
+                            <span>Why this was flagged</span>
+                          </button>
+                          
+                          <AnimatePresence>
+                            {expandedItems.has(change.id) && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="mt-3 p-4 rounded-lg bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)]">
+                                  <p className="text-sm text-[#a1a1a1] leading-relaxed">
+                                    {change.reasoning}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </div>
                       )}
                     </div>
