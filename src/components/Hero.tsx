@@ -70,24 +70,7 @@ const Hero = ({ onGetStarted }: HeroProps) => {
           </motion.button>
         </motion.div>
 
-        {/* Simple stats row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-wrap gap-x-10 gap-y-4 mt-16 pt-10 border-t border-[rgba(255,255,255,0.06)]"
-        >
-          {[
-            { value: '10x', label: 'Faster code reviews' },
-            { value: '500+', label: 'Developers using it' },
-            { value: '24/7', label: 'AI-powered analysis' },
-          ].map((stat, index) => (
-            <div key={index} className="flex items-baseline gap-2">
-              <span className="text-2xl font-semibold text-[#fafafa]">{stat.value}</span>
-              <span className="text-sm text-[#666666]">{stat.label}</span>
-            </div>
-          ))}
-        </motion.div>
+        {/* (Stats removed as requested) */}
       </div>
 
       {/* Scroll indicator */}

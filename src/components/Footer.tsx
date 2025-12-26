@@ -49,12 +49,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center mt-12 pt-8 border-t border-[rgba(255,255,255,0.06)]">
-          <p className="text-sm text-[#666666]">
-            © {new Date().getFullYear()} Assumption Detector. Built for developers who care about code semantics.
-          </p>
-        </div>
+        {/* Copyright removed per request */}
       </div>
     </footer>
   );

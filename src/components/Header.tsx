@@ -37,7 +37,7 @@ const Header = () => {
 
             <div className="flex items-center gap-3">
               <motion.a
-                href="https://github.com"
+                href="https://github.com/SoudipBiswas/genai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-[#1a1a1a] transition-colors"
