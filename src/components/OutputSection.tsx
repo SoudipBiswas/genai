@@ -86,10 +86,10 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="px-6 py-24"
+      className="output-section py-20"
       id="results"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+            className="grid grid-cols-2 md:grid-cols-4 results-stats-grid mb-14"
           >
             {[
               { label: 'Changes', value: stats.totalChanges },
@@ -139,7 +139,7 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
         )}
 
         {/* Results List */}
-        <div className="space-y-4">
+        <div className="results-list">
           <AnimatePresence>
             {results.map((change, index) => {
               const config = getTypeConfig(change.type);
@@ -154,7 +154,7 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
                   transition={{ delay: index * 0.05 }}
                   className={`output-card ${change.type}`}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-6">
                     {/* Type Indicator */}
                     <div 
                       className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -193,14 +193,14 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
                       </p>
 
                       {/* Assumption Comparison */}
-                      <div className="grid md:grid-cols-2 gap-3 mb-4">
-                        <div className="p-3 rounded-lg bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)]">
+                      <div className="grid md:grid-cols-2 gap-6 mb-6">
+                        <div className="p-4 rounded-lg bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)]">
                           <div className="text-[10px] text-red-400 font-medium mb-1.5 uppercase tracking-wider">
                             Before
                           </div>
                           <p className="text-sm text-[#a1a1a1]">{change.oldAssumption}</p>
                         </div>
-                        <div className="p-3 rounded-lg bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)]">
+                        <div className="p-4 rounded-lg bg-[#0a0a0a] border border-[rgba(255,255,255,0.06)]">
                           <div className="text-[10px] text-green-400 font-medium mb-1.5 uppercase tracking-wider">
                             After
                           </div>
@@ -218,7 +218,7 @@ const OutputSection = ({ results, stats, isVisible }: OutputSectionProps) => {
 
                       {/* Recommendation */}
                       {change.recommendation && (
-                        <div className="mt-4 p-3 rounded-lg bg-[#111111] border border-[rgba(255,255,255,0.06)]">
+                        <div className="mt-4 p-4 rounded-lg bg-[#0f0f0f] border border-[rgba(255,255,255,0.06)]">
                           <div className="text-xs text-[#666666] font-medium mb-1 uppercase tracking-wider">
                             Recommendation
                           </div>

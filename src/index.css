@@ -176,13 +176,15 @@ h1, h2, h3, h4, h5, h6 {
 .output-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.2s ease;
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.28s cubic-bezier(.2,.8,.2,1);
 }
 
 .output-card:hover {
   border-color: var(--border-default);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
 }
 
 .output-card.critical {
@@ -199,6 +201,41 @@ h1, h2, h3, h4, h5, h6 {
 
 .output-card.success {
   border-left: 3px solid var(--success);
+}
+
+/* Output section layout helpers */
+.output-section {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media (min-width: 768px) {
+  .output-section {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .output-section {
+    padding-left: 96px;
+    padding-right: 96px;
+  }
+}
+
+.results-list {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .results-list { gap: 24px; }
+}
+
+.results-stats-grid { gap: 16px; }
+
+.result-assumptions {
+  gap: 16px;
 }
 
 /* Mode Selector - Minimal pill style */
