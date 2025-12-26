@@ -1,0 +1,4 @@
+# Add this to root .gitignore or create server/.gitignore
+server/.env
+server/node_modules/
+server/dist/
