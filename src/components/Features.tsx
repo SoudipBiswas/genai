@@ -36,8 +36,8 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="px-6 py-24" id="features">
-      <div className="max-w-6xl mx-auto">
+    <section className="px-6 md:px-12 lg:px-24 py-24" id="features">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,7 +56,7 @@ const Features = () => {
         </motion.div>
 
         {/* Features Grid - Clean bento-style */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -64,7 +64,7 @@ const Features = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="card p-6 group"
+              className="card p-8 group feature-card"
             >
               {/* Icon */}
               <div className="w-10 h-10 rounded-lg bg-[#1a1a1a] flex items-center justify-center mb-4 group-hover:bg-[#222222] transition-colors">

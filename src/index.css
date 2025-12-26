@@ -261,12 +261,68 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
 }
 
+/* Hero specific utilities */
+.hero-section {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 5.5rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-top: 6.5rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    padding-left: 96px;
+    padding-right: 96px;
+    padding-top: 7.5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* Heading spacing tuned for editorial layout */
+.hero-heading {
+  letter-spacing: 0.0125em; /* slightly more airy */
+  word-spacing: 0.18em;     /* increase horizontal spacing between words */
+  line-height: 0.98;        /* tighter line height for stacked display */
+}
+
+.hero-subtitle {
+  max-width: 64ch;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  margin-bottom: 2.25rem;
+}
+
 /* Subtle grid background */
 .bg-grid {
   background-image: 
     linear-gradient(var(--border-subtle) 1px, transparent 1px),
     linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
   background-size: 60px 60px;
+}
+
+/* Feature card specific tweaks */
+.feature-card {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  .feature-card { min-height: 180px; }
+}
+
+@media (min-width: 1280px) {
+  .feature-card { min-height: 200px; }
 }
 
 /* Scrollbar - Minimal */

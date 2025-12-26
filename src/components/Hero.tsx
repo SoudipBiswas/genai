@@ -7,8 +7,8 @@ interface HeroProps {
 
 const Hero = ({ onGetStarted }: HeroProps) => {
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 pt-20">
-      <div className="max-w-4xl mx-auto">
+    <section className="min-h-screen flex flex-col justify-center hero-section">
+      <div className="max-w-5xl mx-auto">
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -26,7 +26,7 @@ const Hero = ({ onGetStarted }: HeroProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[#fafafa] mb-6 leading-[1.1] tracking-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[#fafafa] mb-6 hero-heading"
         >
           Detect assumption
           <br />
@@ -38,7 +38,7 @@ const Hero = ({ onGetStarted }: HeroProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl text-[#a1a1a1] max-w-2xl mb-10 leading-relaxed"
+          className="text-lg md:text-xl hero-subtitle leading-relaxed"
         >
           Don't just see what changed—understand why it matters.
           Analyze semantic shifts, API cost implications, and performance impacts.
