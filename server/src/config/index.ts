@@ -30,7 +30,7 @@ export const config: Config = {
 };
 
 // Validate critical config
-if (!config.geminiApiKey || config.geminiApiKey === 'your_gemini_api_key_here') {
+if (!config.geminiApiKey || config.geminiApiKey === 'AIzaSyDnwLUB6_gBvnWFE7ICCX_HpTcQZZly54k') {
   console.error('⚠️  WARNING: GEMINI_API_KEY is not set or using placeholder value.');
   console.error('   Please add your actual API key to server/.env file');
 }

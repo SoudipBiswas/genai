@@ -51,7 +51,19 @@ router.post('/analyze', async (req: Request<{}, {}, AnalyzeCodeRequest>, res: Re
     });
   } catch (error) {
     console.error('[API] Analysis error:', error);
-    
+
+    const errAny = error as any;
+
+    // If the service detected a revoked/leaked API key, return a clear client-facing message
+    if (errAny && (errAny.code === 'GEMINI_API_KEY_REVOKED' || errAny.statusCode === 401)) {
+      res.status(401).json({
+        success: false,
+        error: 'GEMINI_API_KEY_REVOKED',
+        message: errAny instanceof Error ? errAny.message : 'Gemini API key appears revoked or leaked. Replace GEMINI_API_KEY in server/.env with a valid key.',
+      });
+      return;
+    }
+
     res.status(500).json({
       success: false,
       error: 'ANALYSIS_FAILED',

@@ -44,10 +44,24 @@ export class GeminiService {
       return analysis;
     } catch (error) {
       console.error('[Gemini] API Error Details:', error);
+
+      // Detect common leaked/revoked API key error from GoogleGenerativeAI client
+      const errAny = error as any;
+      const message = errAny && errAny.message ? String(errAny.message) : '';
+
+      if (errAny && (errAny.status === 403 || message.includes('Your API key was reported as leaked'))) {
+        const userMessage = 'GEMINI_API_KEY_REVOKED: Your Gemini API key appears to be revoked or reported as leaked. Replace GEMINI_API_KEY in server/.env with a valid key.';
+        const e = new Error(userMessage);
+        (e as any).statusCode = 401;
+        (e as any).code = 'GEMINI_API_KEY_REVOKED';
+        throw e;
+      }
+
       if (error instanceof Error) {
         console.error('[Gemini] Error message:', error.message);
         console.error('[Gemini] Error stack:', error.stack);
       }
+
       throw new Error('Failed to analyze code with Gemini API: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   }
