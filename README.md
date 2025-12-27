@@ -1,6 +1,23 @@
 # Assumption Change Detector
 
 An AI-powered tool that analyzes code changes to detect shifts in underlying assumptions about API costs, performance, security, and architecture.
+## Features
+
+- **Dual-pane code comparison** with Monaco editor
+- **AI-powered assumption detection** using Google Gemini 1.5 Flash
+- **Multi-language support** (TypeScript, JavaScript, Python, Java, C++, Go, Rust, and more)
+- **Detailed reasoning** for each flagged change
+- **Cost and performance impact** estimates
+- **Minimal, editorial design** aesthetic
+
+## Tech Stack
+
+- Frontend: React 19 + TypeScript + Vite 7
+- Styling: Tailwind CSS + Custom CSS
+- Animations: Framer Motion
+- Code Editor: Monaco Editor
+- Backend: Node.js + Express + TypeScript
+- AI: Google Gemini 1.5 Flash API
 
 ## Setup
 
@@ -45,23 +62,6 @@ FRONTEND_URL=http://localhost:5173
 npm run dev
 ```
 
-## Features
-
-- **Dual-pane code comparison** with Monaco editor
-- **AI-powered assumption detection** using Google Gemini 1.5 Flash
-- **Multi-language support** (TypeScript, JavaScript, Python, Java, C++, Go, Rust, and more)
-- **Detailed reasoning** for each flagged change
-- **Cost and performance impact** estimates
-- **Minimal, editorial design** aesthetic
-
-## Tech Stack
-
-- Frontend: React 19 + TypeScript + Vite 7
-- Styling: Tailwind CSS + Custom CSS
-- Animations: Framer Motion
-- Code Editor: Monaco Editor
-- Backend: Node.js + Express + TypeScript
-- AI: Google Gemini 1.5 Flash API
 
 ---
 
