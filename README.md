@@ -1,4 +1,4 @@
-# Assumption Change Detectors
+# Assumption Change Detector
 
 An AI-powered tool that analyzes code changes to detect shifts in underlying assumptions about API costs, performance, security, and architecture.
 ## Features
